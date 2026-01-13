@@ -729,6 +729,60 @@ body.menu-open {
   }
 }
 
+/* ================= FOOTER LEGAL POPUP ================= */
+.legal-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+
+.legal-popup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.legal-popup-inner {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 28px;
+  max-width: 720px;
+  width: calc(100% - 32px);
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 30px 80px rgba(0,0,0,.7);
+  position: relative;
+}
+
+.legal-popup-inner h3 {
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
+.legal-popup-inner p,
+.legal-popup-inner li {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.legal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
+}
+
 
   </style>
 </head>
@@ -955,9 +1009,9 @@ body.menu-open {
     <div class="container footer-row">
       <p>© 2026 deartbox Packaging — Part of PT. Xerography Indonesia — All rights reserved</p>
       <div style="display:flex;gap:16px;align-items:center">
-        <a href="#" style="color:var(--muted);text-decoration:none;font-size:13px">Privacy</a>
-        <a href="#terms" style="color:var(--muted);text-decoration:none;font-size:13px">Terms</a>
-        <a href="#faq" style="color:var(--muted);text-decoration:none;font-size:13px">FAQ</a>
+        <a href="#" style="color:var(--muted);text-decoration:none;font-size:13px" data-popup="privacy">Privacy</a>
+        <a href="#" style="color:var(--muted);text-decoration:none;font-size:13px" data-popup="terms">Terms</a>
+        <a href="#" style="color:var(--muted);text-decoration:none;font-size:13px" data-popup="faq">FAQ</a>
       </div>
     </div>
   </footer>
@@ -1081,6 +1135,66 @@ if ('IntersectionObserver' in window) {
   revealItems.forEach(el => observer.observe(el));
 }
 
+ const popup = document.getElementById('legalPopup');
+  const title = document.getElementById('legalTitle');
+  const content = document.getElementById('legalContent');
+  const closeBtn = popup.querySelector('.legal-close');
+
+  const popupData = {
+    privacy: {
+      title: 'Privacy Policy',
+      content: `
+        <p>Kami menghormati privasi Anda. Data yang dikirim melalui website ini
+        hanya digunakan untuk keperluan komunikasi dan penawaran bisnis.</p>
+        <p>Kami tidak membagikan data Anda kepada pihak ketiga tanpa izin.</p>
+      `
+    },
+    terms: {
+      title: 'Terms & Conditions',
+      content: `
+        <p>Semua informasi di website ini bersifat informatif dan dapat berubah
+        sewaktu-waktu tanpa pemberitahuan.</p>
+        <p>Pemesanan dianggap sah setelah adanya persetujuan tertulis.</p>
+      `
+    },
+    faq: {
+      title: 'Frequently Asked Questions',
+      content: `
+        <ul>
+          <li>MOQ mulai dari 200 pcs</li>
+          <li>Lead time produksi 4–6 minggu</li>
+          <li>Fully custom ukuran & finishing</li>
+          <li>Konsultasi gratis sebelum produksi</li>
+        </ul>
+      `
+    }
+  };
+
+  document.querySelectorAll('[data-popup]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const key = link.dataset.popup;
+      title.textContent = popupData[key].title;
+      content.innerHTML = popupData[key].content;
+      popup.classList.add('show');
+      popup.setAttribute('aria-hidden', 'false');
+    });
+  });
+
+  function closePopup() {
+    popup.classList.remove('show');
+    popup.setAttribute('aria-hidden', 'true');
+  }
+
+  closeBtn.addEventListener('click', closePopup);
+  popup.addEventListener('click', e => {
+    if (e.target === popup) closePopup();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closePopup();
+  });
+
 
 
     // Accessibility: prefer-reduced-motion handled by CSS
@@ -1097,15 +1211,11 @@ if ('IntersectionObserver' in window) {
   Konsultasi via WhatsApp
 </a>
 
-<div id="modalPrivacy" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3>Privacy Policy</h3>
-      <button class="modal-close" onclick="closeModal('privacy')">×</button>
-    </div>
-    <div class="modal-body">
-      <p>Your privacy content here...</p>
-    </div>
+<div id="legalPopup" class="legal-popup" aria-hidden="true">
+  <div class="legal-popup-inner">
+    <button class="legal-close" aria-label="Close">×</button>
+    <h3 id="legalTitle"></h3>
+    <div id="legalContent"></div>
   </div>
 </div>
 
