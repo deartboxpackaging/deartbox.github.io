@@ -1274,38 +1274,31 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const isNearBottom = () => {
-    const threshold = 120; // px before bottom
+    const threshold = 160;
     return (
       window.innerHeight + window.scrollY >=
-      document.body.offsetHeight - threshold
+      document.documentElement.scrollHeight - threshold
     );
   };
 
-  const toggleStickyCTA = () => {
-    // HIDE conditions
-    if (
-      isKeyboardOpen() ||
-      isNearBottom() ||
-      window.scrollY < window.innerHeight * 0.65
-    ) {
-      stickyCTA.classList.remove('show');
-      return;
-    }
-
-    // SHOW condition
-    stickyCTA.classList.add('show');
+  const shouldShow = () => {
+    if (isKeyboardOpen()) return false;
+    if (isNearBottom()) return false;
+    if (window.scrollY < window.innerHeight * 0.65) return false;
+    return true;
   };
 
-  // Update base height on orientation change
+  const updateCTA = () => {
+    stickyCTA.classList.toggle('show', shouldShow());
+  };
+
+  window.addEventListener('scroll', updateCTA, { passive: true });
   window.addEventListener('resize', () => {
     baseViewportHeight = Math.max(baseViewportHeight, window.innerHeight);
-    toggleStickyCTA();
+    updateCTA();
   });
 
-  window.addEventListener('scroll', toggleStickyCTA, { passive: true });
-
-  // run once
-  toggleStickyCTA();
+  updateCTA();
 });
 
 /* ===============================
@@ -1425,7 +1418,7 @@ function handleRFQ(e) {
 
   form.reset();
 }
-(window.innerHeight + window.scrollY) >= (document.body.offsetHeight - threshold)
+
 
 
     // Accessibility: prefer-reduced-motion handled by CSS
