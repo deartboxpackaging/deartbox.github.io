@@ -1040,6 +1040,95 @@ body.menu-open {
       </div>
     </section>
 
+<section id="rfq" class="container" data-reveal>
+  <h2 class="section-title">Request a Custom Packaging Quote</h2>
+
+  <div class="contact-grid">
+    <!-- RFQ FORM -->
+    <form class="card" id="rfqForm" onsubmit="handleRFQ(event)">
+      
+      <label for="rfq-name">Full Name</label>
+      <input id="rfq-name" name="name" type="text" required placeholder="Your name">
+
+      <label for="rfq-email">Business Email</label>
+      <input id="rfq-email" name="email" type="email" required placeholder="email@company.com">
+
+      <label for="rfq-brand">Brand / Company</label>
+      <input id="rfq-brand" name="brand" type="text" placeholder="Brand or company name">
+
+      <label for="rfq-industry">Industry</label>
+      <select id="rfq-industry" name="industry" required>
+        <option value="">Select industry</option>
+        <option>Beauty / Skincare</option>
+        <option>Fashion / Lifestyle</option>
+        <option>Gourmet / Food</option>
+        <option>Corporate / Gift</option>
+        <option>Other</option>
+      </select>
+
+      <label for="rfq-box">Packaging Type</label>
+      <select id="rfq-box" name="boxType" required>
+        <option value="">Select packaging type</option>
+        <option>Rigid / Hardbox</option>
+        <option>Hardbox with Insert</option>
+        <option>Custom Shape Hardbox</option>
+      </select>
+
+      <label for="rfq-qty">Estimated Quantity (MOQ starts from 200 pcs)</label>
+      <input id="rfq-qty" name="quantity" type="number" min="200" placeholder="e.g. 500">
+
+      <label for="rfq-message">Project Brief / Requirements</label>
+      <textarea
+        id="rfq-message"
+        name="message"
+        rows="5"
+        placeholder="Size, material, finishing, target launch date, or any notes"
+        required
+      ></textarea>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-submit">
+          Request Quote
+        </button>
+        <a
+          href="https://wa.me/628195181427?text=Halo%20deartbox%2C%20saya%20ingin%20request%20custom%20hardbox%20quote."
+          target="_blank"
+          rel="noopener"
+          class="btn btn-download"
+        >
+          WhatsApp Us
+        </a>
+      </div>
+
+      <p class="hero-trust">
+        Typical response within 24 hours • Consultation is free
+      </p>
+    </form>
+
+    <!-- RFQ SIDE INFO -->
+    <aside class="card">
+      <h3>What Happens Next?</h3>
+      <ol style="color:var(--muted); line-height:1.9; padding-left:18px">
+        <li>Our team reviews your requirements</li>
+        <li>Material & structure recommendation</li>
+        <li>Cost estimation & lead time</li>
+        <li>Sampling & production planning</li>
+      </ol>
+
+      <div style="margin-top:18px">
+        <h4>Why Brands Choose deartbox</h4>
+        <ul style="color:var(--muted); line-height:1.8; padding-left:18px">
+          <li>Low MOQ & scalable production</li>
+          <li>Premium finishing capability</li>
+          <li>Strict quality control</li>
+          <li>Clear communication & timeline</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+
     <section id="contact" class="container">
       <h2 class="section-title">Contact Us</h2>
       <div class="contact-grid">
@@ -1285,7 +1374,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+function handleRFQ(e) {
+  e.preventDefault();
 
+  const form = e.target;
+
+  const data = {
+    name: form.name.value.trim(),
+    email: form.email.value.trim(),
+    brand: form.brand.value.trim(),
+    industry: form.industry.value,
+    boxType: form.boxType.value,
+    quantity: form.quantity.value,
+    message: form.message.value.trim()
+  };
+
+  if (!data.name || !data.email || !data.industry || !data.boxType || !data.message) {
+    alert('Please complete all required fields.');
+    return;
+  }
+
+  console.log('RFQ submitted:', data);
+
+  alert(
+    'Thank you! Your RFQ has been submitted.\nOur team will contact you within 24 hours.'
+  );
+
+  form.reset();
+}
 
 
 
