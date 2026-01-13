@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id-ID">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="deartbox Packaging adalah produsen hardbox premium fully custom untuk brand lifestyle, beauty, fashion, dan gourmet. Special-made board, finishing premium, dan quality control ketat." />
+  <meta name="robots" content="index, follow">
 
   <title>deartbox Packaging — Premium Hardbox Packaging</title>
 
@@ -143,7 +144,7 @@
       overflow:visible;
     }
 
-    .hero-left h2{
+    .hero-left h1{
       font-size: clamp(28px, 4.6vw, 48px);
       line-height:1.05;
       margin:0 0 18px 0;
@@ -163,6 +164,16 @@
       transition:transform .16s var(--ease);
     }
     .btn-primary:active,.btn-primary:hover{transform:translateY(-3px)}
+    .btn-ghost{
+      border:1px solid rgba(255,255,255,0.06);
+      background:transparent;
+      padding:12px 20px;border-radius:999px;color:#fff;font-weight:700;text-decoration:none;
+    }
+    .btn-primary2{
+      background:rgb(37, 211, 102);color:rgb(255, 255, 255);padding:12px 20px;border-radius:999px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+      transition:transform .16s var(--ease);
+    }
+    .btn-primary2:active,.btn-primary2:hover{transform:translateY(-3px)}
     .btn-ghost{
       border:1px solid rgba(255,255,255,0.06);
       background:transparent;
@@ -658,11 +669,15 @@ body.menu-open {
    (MOBILE ONLY / NO LAYOUT CHANGE)
    =============================== */
 
+/* ===============================
+   FIX STICKY CTA (MOBILE SAFE)
+   =============================== */
+
 .sticky-cta {
   position: fixed;
   left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%) translateY(120%);
+  bottom: -80px; /* hide offscreen safely */
+  transform: translateX(-50%);
   z-index: 140;
 
   padding: 14px 22px;
@@ -675,11 +690,12 @@ body.menu-open {
   color: #fff;
 
   box-shadow: 0 16px 40px rgba(230,57,70,0.28);
-  transition: transform .35s var(--ease-premium);
+  transition: bottom .35s var(--ease-premium);
 }
 
+/* visible state */
 .sticky-cta.show {
-  transform: translateX(-50%) translateY(0);
+  bottom: calc(18px + env(safe-area-inset-bottom));
 }
 
 @media (min-width: 981px) {
@@ -723,7 +739,9 @@ body.menu-open {
         <a class="logo" href="#top">
           <div class="logo-mark" aria-hidden="true">d</div>
           <div class="logo-text">
-            <h1>deartbox Packaging</h1>
+              <span style="font-size:16px;font-weight:700;display:block">
+                deartbox Packaging
+              </span>
             <p>Box Kamu, Misi Kami..!</p>
           </div>
         </a>
@@ -758,7 +776,7 @@ body.menu-open {
   <main>
     <section class="hero container" id="top" data-reveal>
       <div class="hero-left">
-        <h2>Premium hardbox packaging — crafted for brands that demand excellence.</h2>
+        <h1>Premium hardbox packaging — crafted for brands that demand excellence.</h1>
         <p>Kami mendesain dan memproduksi hardbox premium untuk brand lifestyle, beauty, gourmet, dan fashion — kombinasi special-made board, finishing premium, dan lini semi-otomatis untuk kualitas konsisten.</p>
 
         <div class="hero-ctas">
@@ -853,6 +871,22 @@ body.menu-open {
       </div>
     </section>
 
+    <section class="container" aria-label="Call to Action">
+  <div class="card" style="text-align:center">
+    <h3>Siap produksi hardbox premium untuk brand Anda?</h3>
+    <p style="color:var(--muted);max-width:60ch;margin:12px auto 20px">
+      Konsultasikan spesifikasi, MOQ, dan estimasi biaya bersama tim deartbox.
+    </p>
+    <a href="https://wa.me/6281234567890?text=Halo%20deartbox%2C%20saya%20ingin%20konsultasi%20hardbox%20packaging." 
+    target="_blank" 
+    class="btn-primary2"
+    rel="noopener"
+    >
+      Chat via WhatsApp
+    </a>
+  </div>
+</section>
+
     <section id="process" class="container" data-reveal>
       <h2 class="section-title">Our Process</h2>
       <div class="process-list" role="list">
@@ -918,7 +952,7 @@ body.menu-open {
 
   <footer>
     <div class="container footer-row">
-      <p>© 2026 deartbox Packaging — All rights reserved</p>
+      <p>© 2026 deartbox Packaging — Part of PT. Xerography Indonesia — All rights reserved</p>
       <div style="display:flex;gap:16px;align-items:center">
         <a href="#privacy" style="color:var(--muted);text-decoration:none;font-size:13px">Privacy</a>
         <a href="#terms" style="color:var(--muted);text-decoration:none;font-size:13px">Terms</a>
@@ -1006,18 +1040,24 @@ body.menu-open {
     }
 
 /* ===============================
-   STICKY CTA VISIBILITY
+   STICKY CTA VISIBILITY (FIXED)
    =============================== */
-const stickyCTA = document.querySelector('.sticky-cta');
-
-window.addEventListener('scroll', () => {
+document.addEventListener('DOMContentLoaded', () => {
+  const stickyCTA = document.querySelector('.sticky-cta');
   if (!stickyCTA) return;
 
-  if (window.scrollY > window.innerHeight * 0.6) {
-    stickyCTA.classList.add('show');
-  } else {
-    stickyCTA.classList.remove('show');
-  }
+  const toggleStickyCTA = () => {
+    if (window.scrollY > window.innerHeight * 0.65) {
+      stickyCTA.classList.add('show');
+    } else {
+      stickyCTA.classList.remove('show');
+    }
+  };
+
+  // run once on load
+  toggleStickyCTA();
+
+  window.addEventListener('scroll', toggleStickyCTA, { passive: true });
 });
 
 /* ===============================
@@ -1046,8 +1086,14 @@ if ('IntersectionObserver' in window) {
   </script>
 
   <!-- STICKY MOBILE CTA -->
-<a href="#contact" class="sticky-cta" aria-label="Request Quote">
-  Request Quote
+<a
+  href="https://wa.me/6281234567890?text=Halo%20deartbox%2C%20saya%20ingin%20konsultasi%20hardbox%20packaging."
+  class="sticky-cta"
+  aria-label="Chat via WhatsApp"
+  target="_blank"
+  rel="noopener"
+>
+  Konsultasi via WhatsApp
 </a>
 
 
