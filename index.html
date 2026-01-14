@@ -1015,6 +1015,70 @@ section[aria-label="Call to Action"] .card {
 .mockup:hover img{
   transform: scale(1.04);
 }
+/* ===============================
+   CONTACT US — DIRECT VERSION
+   =============================== */
+
+.contact-direct{
+  max-width: 720px;
+}
+
+.contact-copy h3{
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.contact-copy p{
+  color: var(--muted);
+  max-width: 60ch;
+  margin-bottom: 18px;
+}
+
+.contact-points{
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.contact-points li{
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #ddd;
+}
+
+.contact-actions{
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+/* MOBILE */
+@media (max-width: 768px){
+  .contact-actions{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+/* =====================================================
+   CTA SECTION — DISABLE HOVER / ANIMATION
+   (Siap Mengembangkan Nilai Brand)
+   ===================================================== */
+
+section[aria-label="Call to Action"] .card,
+section[aria-label="Call to Action"] .card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+section[aria-label="Call to Action"] a,
+section[aria-label="Call to Action"] a:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+
 </style>
 </head>
 <body>
@@ -1359,28 +1423,49 @@ section[aria-label="Call to Action"] .card {
   </div>
 </section>
 
-
     <section id="contact" class="container">
       <h2 class="section-title">Contact Us</h2>
       <div class="contact-grid">
-        <form class="card" id="contactForm" autocomplete="on" onsubmit="handleSubmit(event)">
-          <label for="name">Nama lengkap</label>
-          <input id="name" name="name" type="text" placeholder="Nama lengkap" required>
+          <div class="contact-direct">
 
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="email@domain.com" required>
+    <div class="contact-copy">
+      <h3>Talk to a Real Packaging Specialist</h3>
+      <p>
+        Kami membantu brand dari tahap ide, pemilihan material,
+        sampai estimasi biaya & timeline produksi — tanpa komitmen.
+      </p>
 
-          <label for="company">Perusahaan / Brand</label>
-          <input id="company" name="company" type="text" placeholder="Nama brand">
+      <ul class="contact-points">
+        <li>✔️ Konsultasi gratis & tanpa kewajiban</li>
+        <li>✔️ Respon cepat ≤ 24 jam kerja</li>
+        <li>✔️ Pengalaman menangani brand premium</li>
+        <li>✔️ MOQ fleksibel untuk growing brands</li>
+      </ul>
 
-          <label for="message">Ringkasan project / kebutuhan</label>
-          <textarea id="message" name="message" placeholder="Ceritakan kebutuhan & timeline Anda" rows="5" required></textarea>
+      <div class="contact-actions">
+        <a
+          href="https://wa.me/628195181427?text=Halo%20deartbox%2C%20saya%20ingin%20konsultasi%20project%20packaging."
+          target="_blank"
+          rel="noopener"
+          class="btn-primary2"
+        >
+          Chat via WhatsApp
+        </a>
 
-          <div class="form-actions">
-            <button type="submit" class="btn btn-submit">Kirim Pesan</button>
-            <a class="btn btn-download" href="#" onclick="event.preventDefault(); alert('Download will be ready when brochure uploaded')">Download Brochure</a>
-          </div>
-        </form>
+        <a
+          href="mailto:hello@deartbox.com?subject=Packaging%20Consultation"
+          class="btn btn-download"
+        >
+          Email Us
+        </a>
+      </div>
+
+      <p class="hero-trust">
+        Tidak spam • Konsultasi gratis • Respon cepat
+      </p>
+    </div>
+
+  </div>
 
         <aside class="card" aria-labelledby="officeTitle">
           <h3 id="officeTitle">Our Workshop — Development </h3>
@@ -1395,11 +1480,7 @@ section[aria-label="Call to Action"] .card {
               <li>Kapasitas: up to 50,000 pcs / bulan</li>
             </ul>
           </div>
-
-          <div style="margin-top:12px;color:var(--muted)">
-            <strong>Konsultasi gratis</strong>
-            <p style="margin:8px 0 0 0">Konsultasi step-by-step dari mockup sampai produksi untuk brand baru.</p>
-          </div>
+          
         </aside>
       </div>
     </section>
