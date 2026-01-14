@@ -1554,27 +1554,7 @@ section[aria-label="Call to Action"] a:hover {
         }
       });
     });
-
-    // Simple submit handler (replace with real AJAX/backend)
-    function handleSubmit(e){
-      e.preventDefault();
-      const form = e.target;
-      const data = {
-        name: form.name.value.trim(),
-        email: form.email.value.trim(),
-        company: form.company.value.trim(),
-        message: form.message.value.trim()
-      };
-      // basic validation
-      if(!data.name || !data.email || !data.message){
-        alert('Mohon isi semua field yang diperlukan.');
-        return;
-      }
-      // stub: replace with fetch to your backend
-      console.log('Lead sent', data);
-      alert('Terima kasih! Pesan Anda berhasil dikirim. Kami akan menghubungi Anda.');
-      form.reset();
-    }
+    
 
 /* ===============================
    STICKY CTA VISIBILITY — FINAL
@@ -1641,6 +1621,8 @@ if ('IntersectionObserver' in window) {
 document.addEventListener('DOMContentLoaded', () => {
 
   const popup = document.getElementById('legalPopup');
+  if (!popup) return;
+
   const title = document.getElementById('legalTitle');
   const content = document.getElementById('legalContent');
   const closeBtn = popup.querySelector('.legal-close');
