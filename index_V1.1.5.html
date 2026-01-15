@@ -1413,7 +1413,10 @@ section .grid-3 .card p {
 
 .industry-card {
   position: relative;
-  height: 360px;
+  height: 370px;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(99, 3, 3, 0.418);
 }
 
 /* Image */
@@ -1423,6 +1426,7 @@ section .grid-3 .card p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform .3s ease;
 }
 
 /* Overlay */
@@ -1455,10 +1459,14 @@ section .grid-3 .card p {
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 10px;
+  color: #fff;
 }
 
-/* Details (hidden by default) */
+/* List styling */
 .industry-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   opacity: 0;
   transform: translateY(10px);
   transition: all .35s ease;
@@ -1468,6 +1476,15 @@ section .grid-3 .card p {
   font-size: 13.5px;
   color: rgba(255,255,255,.85);
   margin-bottom: 6px;
+  padding-left: 18px;
+  position: relative;
+}
+
+.industry-content li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: rgba(255,255,255,.6);
 }
 
 /* Hover effect */
@@ -1479,10 +1496,6 @@ section .grid-3 .card p {
   opacity: .9;
 }
 
-.industry-card:hover .industry-content {
-  transform: translateY(0);
-}
-
 .industry-card:hover ul {
   opacity: 1;
   transform: translateY(0);
@@ -1490,15 +1503,13 @@ section .grid-3 .card p {
 
 /* Mobile safety */
 @media (max-width: 980px) {
-  .industry-card img {
-    height: 240px;
+  .industry-card {
+    height: 280px;
   }
+  
   .industry-content ul {
     opacity: 1;
     transform: none;
-  }
-   .industry-card {
-    height: 280px;
   }
 }
 
@@ -1793,57 +1804,65 @@ section .grid-3 .card p {
     </section>
 
     <section class="container" data-reveal>
-      <h2 class="section-title">Solusi Packaging Berdasarkan Industri</h2>
-      <div class="card industry-card">
-        <div class="industry-content">
-          <img 
-              src="assets/images/portfolio/Project_1.webp" 
-              alt="Hardbox premium custom produksi deartbox untuk brand beauty dan fashion"
-              loading="lazy"
-              width="400"
-              height="200"
-              decoding="async">
-          <h3>Beauty & Skincare Brands</h3>
-          <ul style="color:var(--muted); line-height:1.8; padding-left:18px">
-            <li>PR kits & influencer box</li>
-            <li>Packaging kosmetik premium</li>
-            <li>MOQ fleksibel untuk peluncuran produk</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <img 
-              src="assets/images/portfolio/Project_5.webp" 
-              alt="Hardbox premium custom produksi deartbox untuk brand beauty dan fashion"
-              loading="lazy"
-              width="400"
-              height="200"
-              decoding="async">
-          <h3>Fashion & Lifestyle</h3>
-          <ul style="color:var(--muted); line-height:1.8; padding-left:18px">
-            <li>Packaging apparel premium</li>
-            <li>Limited edition box</li>
-            <li>Brand storytelling melalui packaging</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <img 
-              src="assets/images/portfolio/Project_4.webp" 
-              alt="Hardbox premium custom produksi deartbox untuk brand beauty dan fashion"
-              loading="lazy"
-              width="400"
-              height="200"
-              decoding="async">
-          <h3>Gourmet & Specialty Products</h3>
-          <ul style="color:var(--muted); line-height:1.8; padding-left:18px">
-            <li>Gift box & seasonal packaging</li>
-            <li>Rigid food-grade box</li>
-            <li>Packaging dengan nilai jual tinggi</li>
-          </ul>
-        </div>
+  <h2 class="section-title">Solusi Packaging Berdasarkan Industri</h2>
+  <div class="grid-3">
+    
+    <div class="card industry-card">
+      <img 
+        src="assets/images/portfolio/Project_1.webp" 
+        alt="Hardbox premium custom produksi deartbox untuk brand beauty dan fashion"
+        loading="lazy"
+        width="400"
+        height="360"
+        decoding="async">
+      <div class="industry-content">
+        <h3>Beauty & Skincare Brands</h3>
+        <ul>
+          <li>PR kits & influencer box</li>
+          <li>Packaging kosmetik premium</li>
+          <li>MOQ fleksibel untuk peluncuran produk</li>
+        </ul>
       </div>
-    </section>
+    </div>
+
+    <div class="card industry-card">
+      <img 
+        src="assets/images/portfolio/Project_5.webp" 
+        alt="Hardbox premium custom produksi deartbox untuk brand fashion dan lifestyle"
+        loading="lazy"
+        width="400"
+        height="360"
+        decoding="async">
+      <div class="industry-content">
+        <h3>Fashion & Lifestyle</h3>
+        <ul>
+          <li>Packaging apparel premium</li>
+          <li>Limited edition box</li>
+          <li>Brand storytelling melalui packaging</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card industry-card">
+      <img 
+        src="assets/images/portfolio/Project_4.webp" 
+        alt="Hardbox premium custom produksi deartbox untuk gourmet products"
+        loading="lazy"
+        width="400"
+        height="360"
+        decoding="async">
+      <div class="industry-content">
+        <h3>Gourmet & Specialty Products</h3>
+        <ul>
+          <li>Gift box & seasonal packaging</li>
+          <li>Rigid food-grade box</li>
+          <li>Packaging dengan nilai jual tinggi</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
 
     <section class="container" aria-label="Call to Action">
       <div class="card" style="text-align:center">
