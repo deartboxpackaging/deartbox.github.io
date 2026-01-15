@@ -1407,6 +1407,100 @@ section .grid-3 .card p {
     min-height: 340px;
   }
 }
+/* =========================================
+   INDUSTRY SOLUTION — PRO VISUAL UPGRADE
+========================================= */
+
+.industry-card {
+  position: relative;
+  height: 360px;
+}
+
+/* Image */
+.industry-card img {
+  position:absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay */
+.industry-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,.15),
+    rgba(0,0,0,.9)
+  );
+  opacity: .7;
+  z-index: 1;
+  transition: opacity .3s ease;
+}
+
+/* Content */
+.industry-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 22px;
+  z-index: 2;
+}
+
+/* Title */
+.industry-content h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* Details (hidden by default) */
+.industry-content ul {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all .35s ease;
+}
+
+.industry-content li {
+  font-size: 13.5px;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 6px;
+}
+
+/* Hover effect */
+.industry-card:hover img {
+  transform: scale(1.05);
+}
+
+.industry-card:hover::after {
+  opacity: .9;
+}
+
+.industry-card:hover .industry-content {
+  transform: translateY(0);
+}
+
+.industry-card:hover ul {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile safety */
+@media (max-width: 980px) {
+  .industry-card img {
+    height: 240px;
+  }
+  .industry-content ul {
+    opacity: 1;
+    transform: none;
+  }
+   .industry-card {
+    height: 280px;
+  }
+}
 
 
 
@@ -1700,8 +1794,8 @@ section .grid-3 .card p {
 
     <section class="container" data-reveal>
       <h2 class="section-title">Solusi Packaging Berdasarkan Industri</h2>
-      <div class="grid-3">
-        <div class="card">
+      <div class="card industry-card">
+        <div class="industry-content">
           <img 
               src="assets/images/portfolio/Project_1.webp" 
               alt="Hardbox premium custom produksi deartbox untuk brand beauty dan fashion"
