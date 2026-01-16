@@ -2221,6 +2221,22 @@ transition: none !important;
 animation: none !important;
 }
 }
+.process-video-wrapper {
+  background: #fff;
+  border-radius: 20px;
+  padding: 16px;
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.25);
+}
+
+.process-video-wrapper iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  display: block;
+}
+
 
 
   </style>
@@ -2817,13 +2833,18 @@ animation: none !important;
       </div>
 
       <div class="process-visual">
-        <img 
-          src="assets/images/process/flow.webp" 
-          alt="deartbox packaging production workflow"
-          loading="lazy"
-          width="1200"
-          height="auto"
-          decoding="async">
+        <div class="process-video-wrapper">
+          <iframe
+            src="https://www.youtube.com/embed/-vFG_MnTkLk?rel=0"
+            title="Behind the Production Process"
+            frameborder="0"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+
+        </div>
+
       </div>
 
       <div class="process-timeline">
