@@ -44,7 +44,10 @@
   <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000">
   <meta name="msapplication-TileColor" content="#000000">
  
-  
+  <!-- Tambahkan di <head> -->
+  <link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin>
+  <meta http-equiv="Cache-Control" content="public, max-age=31536000">
+
   <!-- 5. CRITICAL INLINE CSS (UI/UX ASLI LU) -->
   <style>
         /* ================ THEME / VARIABLES ================ */
@@ -3484,7 +3487,11 @@ animation: none !important;
         }
       });
     })
-  ();    
+  ();
+  // Tambahkan validasi real-time
+document.querySelectorAll('input, textarea').forEach(el => {
+  el.addEventListener('blur', validateField);
+});    
   </script>
   <button id="backToTop" aria-label="Back to top">
    <svg viewBox="0 0 24 24" aria-hidden="true">
