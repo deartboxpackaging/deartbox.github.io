@@ -2579,6 +2579,10 @@ animation: none !important;
   transition: opacity 0.8s var(--ease-premium);
   z-index: 1;
 }
+.hero-slideshow-container:hover .hero-slide.active img {
+  transform: scale(1.05);
+  transition: transform 6s var(--ease-premium);
+}
 
 .hero-slide.active {
   opacity: 1;
@@ -2589,11 +2593,11 @@ animation: none !important;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 8s var(--ease-premium);
+  transition: transform 6s var(--ease-premium);
 }
 
 .hero-slide.active img {
-  transform: scale(1.05);
+  transform: scale(1);
 }
 
 .slide-overlay {
