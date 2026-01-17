@@ -1432,27 +1432,6 @@ section {
   gap: 8px;
 }
 
-.form-field label {
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.85);
-  margin: 0;
-}
-
-.form-field input,
-.form-field select,
-.form-field textarea {
-  padding: 12px 16px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
-  color: #fff;
-  font-size: 14px;
-  font-family: inherit;
-  transition: all .2s ease;
-  margin: 0;
-}
-
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus {
@@ -3406,6 +3385,12 @@ animation: none !important;
      target="_blank" 
      rel="noopener">Chat via WhatsApp</a>
 
+     <button id="backToTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 4l-7 7h4v9h6v-9h4z"/>
+   </svg>
+</button>
+
   <div id="legalPopup" class="legal-popup" aria-hidden="true">
     <div class="legal-popup-inner">
       <button class="legal-close" aria-label="Close">×</button>
@@ -3859,5 +3844,6 @@ document.head.appendChild(validationStyles);
 
   
 </script>
+
 </body>
 </html>
