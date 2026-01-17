@@ -1085,7 +1085,7 @@ section {
   letter-spacing: 0.05em;
 }
 
-/* ================ MOBILE RESPONSIVE - FIXED ================ */
+/* ================ MOBILE RESPONSIVE - PERBAIKAN HERO ================ */
 
 /* Tablet - 1024px */
 @media (max-width: 1024px) {
@@ -1120,6 +1120,88 @@ section {
 
   .footer-brand {
     grid-column: 1 / -1;
+  }
+
+  /* PERBAIKAN HERO UNTUK TABLET */
+  .hero-modern {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-top: 40px;
+    padding-bottom: 60px;
+  }
+  
+  .hero-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .hero-title {
+    text-align: center;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .hero-description {
+    text-align: center;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .hero-ctas {
+    justify-content: center;
+  }
+  
+  .hero-trust-bar {
+    justify-content: center;
+  }
+  
+  .hero-stats-modern {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  /* PERBAIKAN POSISI PANAH DI DALAM SLIDESHOW */
+  .hero-slideshow-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+  }
+  
+  /* Pastikan panah berada DI DALAM container slideshow */
+  .slide-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    z-index: 20; /* Pastikan di atas gambar */
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .slide-nav.prev {
+    left: 16px !important;
+    right: auto !important;
+  }
+  
+  .slide-nav.next {
+    right: 16px !important;
+    left: auto !important;
+  }
+  
+  /* HIDE STICKY CTA UNTUK MOBILE */
+  .sticky-cta {
+    display: none !important;
   }
 }
 
@@ -1160,42 +1242,59 @@ section {
     display: none !important;
   }
 
-  /* Hero Mobile */
+  /* Hero Mobile - PERBAIKAN UTAMA */
   .hero-modern {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     gap: 32px;
     padding-top: 32px;
     padding-bottom: 48px;
+    text-align: center;
   }
 
+  /* Pastikan konten di atas, slideshow di bawah */
   .hero-content {
-    order: 1;
+    order: 1 !important;
+    text-align: center;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0 16px;
   }
 
   .hero-visual-slideshow {
-    order: 2;
+    order: 2 !important;
+    width: 100%;
+    margin: 0 auto;
   }
 
   .hero-badge {
     font-size: 11px;
     padding: 6px 12px;
     margin-bottom: 16px;
+    display: inline-flex;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .hero-title {
     font-size: clamp(28px, 7vw, 36px);
     line-height: 1.15;
     margin-bottom: 16px;
+    text-align: center;
+    padding: 0 10px;
   }
 
   .hero-description {
     font-size: 14.5px;
     margin-bottom: 24px;
+    text-align: center;
+    padding: 0 10px;
   }
 
   .hero-ctas {
     gap: 10px;
     margin-bottom: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .btn-hero-primary,
@@ -1203,19 +1302,26 @@ section {
     padding: 12px 20px;
     font-size: 14px;
     min-height: 48px;
+    justify-content: center;
   }
 
   .hero-trust-bar {
     padding: 16px 0;
     gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .trust-item {
     font-size: 12px;
+    justify-content: center;
   }
 
   .hero-stats-modern {
     gap: 16px;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
   }
 
   .stat-modern strong {
@@ -1226,37 +1332,80 @@ section {
     font-size: 11px;
   }
 
-  /* Slideshow Mobile */
+  .stat-divider {
+    display: none;
+  }
+
+   /* Slideshow Mobile - POSISI PANAH DI DALAM FOTO */
   .hero-slideshow-container {
     height: 380px;
+    position: relative;
+    width: 100% !important;
+    margin: 0 auto;
+    max-width: 600px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
   }
-
+  
+  /* Reset posisi panah yang salah */
   .slide-nav {
-    width: 40px;
-    height: 40px;
+    position: absolute !important;
+    width: 42px !important;
+    height: 42px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Override CSS yang mungkin salah */
+  .slide-nav.prev {
+    left: 16px !important;
+    right: auto !important;
+    margin-left: 0 !important;
+  }
+  
+  .slide-nav.next {
+    right: 16px !important;
+    left: auto !important;
+    margin-right: 0 !important;
+  }
+  
+  .slide-nav svg {
+    width: 22px !important;
+    height: 22px !important;
+    margin: 0 !important;
   }
 
-  .slide-nav svg {
-    width: 20px;
-    height: 20px;
-  }
 
   .slide-nav.prev {
-    left: 8px;
+    left: 12px !important;
+    right: auto !important;
   }
 
   .slide-nav.next {
-    right: 8px;
+    right: 12px !important;
+    left: auto !important;
   }
 
   /* Feature Mini */
   .hero-features-grid {
     gap: 12px;
+    max-width: 500px;
+    margin: 0 auto;
   }
 
   .feature-mini {
     padding: 14px;
     gap: 10px;
+    text-align: left;
   }
 
   .feature-icon {
@@ -1266,10 +1415,12 @@ section {
 
   .feature-mini h4 {
     font-size: 13px;
+    text-align: left;
   }
 
   .feature-mini p {
     font-size: 11.5px;
+    text-align: left;
   }
 
   /* Sections */
@@ -1287,10 +1438,12 @@ section {
   .section-header-modern h2 {
     font-size: clamp(24px, 5vw, 32px);
     margin-bottom: 12px;
+    text-align: center;
   }
 
   .section-header-modern p {
     font-size: 14px;
+    text-align: center;
   }
 
   /* RFQ & Contact */
@@ -1355,22 +1508,28 @@ section {
 
   .hero-features-grid {
     grid-template-columns: 1fr;
+    max-width: 100%;
   }
 
-  /* Hero */
+  /* Hero - PERBAIKAN LEBIH KECIL */
   .hero-modern {
     padding-top: 24px;
     padding-bottom: 40px;
+    text-align: center;
   }
 
   .hero-title {
     font-size: 26px;
     margin-bottom: 14px;
+    text-align: center;
+    padding: 0 16px;
   }
 
   .hero-description {
     font-size: 13.5px;
     margin-bottom: 20px;
+    text-align: center;
+    padding: 0 16px;
   }
 
   .hero-badge {
@@ -1382,41 +1541,69 @@ section {
     flex-direction: column;
     gap: 10px;
     padding: 14px 0;
+    align-items: center;
   }
 
   .hero-stats-modern {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
+    text-align: center;
   }
 
   .stat-divider {
     display: none;
   }
 
-  /* Slideshow */
+  /* Slideshow - PANAH DI DALAM FOTO */
   .hero-slideshow-container {
-    height: 280px;
+    height: 300px !important;
+    max-width: 100%;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
   }
-
-  .slideshow-dots {
-    gap: 8px;
-    margin-top: 8px;
-  }
-
-  .slide-dot {
-    width: 8px;
-    height: 8px;
-  }
-
+  
+  /* Reset semua posisi panah */
   .slide-nav {
-    width: 36px;
-    height: 36px;
+    position: absolute !important;
+    width: 40px !important;
+    height: 40px !important;
+    top: 50% !important;
+    left: auto !important;
+    right: auto !important;
+    transform: translateY(-50%) !important;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .slide-nav.prev {
+    left: 12px !important;
+    right: auto !important;
+  }
+  
+  .slide-nav.next {
+    right: 12px !important;
+    left: auto !important;
+  }
+  
+  .slide-nav svg {
+    width: 20px !important;
+    height: 20px !important;
   }
 
-  .slide-nav svg {
-    width: 18px;
-    height: 18px;
+
+  .slide-nav.prev {
+    left: 10px !important;
+  }
+
+  .slide-nav.next {
+    right: 10px !important;
   }
 
   /* Cards */
@@ -1484,34 +1671,10 @@ section {
 
   /* Back to Top */
   #backToTop {
-    bottom: 90px;
-    right: 16px;
+    bottom: 100px;
+    right: 20px;
     width: 48px;
     height: 48px;
-  }
-
-  /* Process Video */
-  /* ================ ACCESSIBILITY - REDUCED MOTION ================ */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    transition: none !important;
-    animation: none !important;
-  }
-
-  .hero-slide img {
-    transition: none !important;
-  }
-
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-.process-video-wrapper {
-    padding: 12px;
-    margin-bottom: 32px;
   }
 }
 
@@ -1543,18 +1706,27 @@ section {
     font-size: 9.5px;
   }
 
-  /* Hero */
+  /* Hero - PERBAIKAN EXTRA KECIL */
+  .hero-modern {
+    text-align: center;
+  }
+  
   .hero-title {
     font-size: 24px;
+    padding: 0 16px;
   }
 
   .hero-description {
     font-size: 13px;
+    padding: 0 16px;
   }
 
   .hero-ctas {
     flex-direction: column;
     width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .hero-ctas a {
@@ -1568,22 +1740,32 @@ section {
     font-size: 13.5px;
   }
 
-  /* Slideshow */
+   /* Slideshow */
   .hero-slideshow-container {
-    height: 240px;
+    height: 250px !important;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
   }
-
+  
+  /* Perbaikan posisi panah untuk mobile sangat kecil */
   .slide-nav {
-    width: 32px;
-    height: 32px;
+    width: 36px !important;
+    height: 36px !important;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 20;
   }
-
+  
   .slide-nav.prev {
-    left: 6px;
+    left: 10px !important;
+    right: auto !important;
   }
-
+  
   .slide-nav.next {
-    right: 6px;
+    right: 10px !important;
+    left: auto !important;
   }
 
   /* Sections */
@@ -1594,10 +1776,16 @@ section {
 
   .section-header-modern {
     margin-bottom: 32px;
+    text-align: center;
   }
 
   .section-header-modern h2 {
     font-size: 22px;
+    padding: 0 16px;
+  }
+
+  .section-header-modern p {
+    padding: 0 16px;
   }
 
   /* Cards */
@@ -1619,6 +1807,9 @@ section {
   .cta-large-buttons {
     flex-direction: column;
     width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .cta-large-buttons a {
@@ -1654,15 +1845,15 @@ section {
     font-size: 13.5px;
   }
 
-  /* Hide Sticky CTA di mobile kecil */
+  /* HIDE STICKY CTA - FIXED */
   .sticky-cta {
-    display: none;
+    display: none !important;
   }
 
   /* Back to Top */
   #backToTop {
     bottom: 20px;
-    right: 12px;
+    right: 16px;
     width: 44px;
     height: 44px;
   }
@@ -1724,27 +1915,25 @@ section {
 
   .hero-title {
     font-size: 22px;
+    padding: 0 12px;
   }
 
   .hero-slideshow-container {
-    height: 220px;
+    height: 220px !important;
   }
-
-  .section-header-modern h2 {
-    font-size: 20px;
+  
+  /* Perbaikan panah untuk layar sangat kecil */
+  .slide-nav {
+    width: 34px !important;
+    height: 34px !important;
   }
-
-  .btn-hero-primary,
-  .btn-hero-secondary,
-  .btn-cta-wa,
-  .btn-submit-modern {
-    padding: 12px 16px;
-    font-size: 13px;
+  
+  .slide-nav.prev {
+    left: 8px !important;
   }
-
-  #backToTop {
-    width: 40px;
-    height: 40px;
+  
+  .slide-nav.next {
+    right: 8px !important;
   }
 }
 
