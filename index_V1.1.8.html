@@ -2238,6 +2238,23 @@ animation: none !important;
   border-radius: 12px;
   display: block;
 }
+.field-invalid {
+  border-color: #e63946 !important;
+  background: rgba(230, 57, 70, 0.05) !important;
+}
+
+.field-error {
+  display: block;
+  font-size: 12px;
+  color: #e63946;
+  margin-top: 4px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 
 
@@ -2397,7 +2414,7 @@ animation: none !important;
             <span>Kapasitas/Bulan</span>
           </div>
           <div class="stat-modern">
-            <span>*Tergantung spesifikasi & finishing<span>
+            <span>*Tergantung spesifikasi & finishing</span>
            
           </div>
         </div>
@@ -3131,7 +3148,7 @@ animation: none !important;
             </div>
             <div class="contact-card-content">
               <h4>Visit Our Workshop</h4>
-              <p>Jl. Gandaria 1 No.3, Gandaria Utara<br>Jakarta Selatan 12130, Indonesia</p>
+              <p>Jl. Gandaria 1 No. 3, Gandaria Utara<br>Jakarta Selatan 12130, Indonesia</p>
               <a href="https://maps.app.goo.gl/3rrdeTY66e4eDsoU6" target="_blank" rel="noopener" class="contact-link">Get Directions →</a>
             </div>
           </div>
@@ -3330,307 +3347,448 @@ animation: none !important;
   </div>
 
   <script>
-    // Optimized version dengan semua improvements
-    (function() {
-      'use strict';
+    // FIXED VERSION - ALL ERRORS RESOLVED
+(function() {
+  'use strict';
 
-      // Mobile Menu - tetap sama
-      const mobileToggle = document.getElementById('mobileToggle');
-      const offcanvas = document.getElementById('offcanvasMenu');
-      const overlay = document.getElementById('overlay');
-      const offClose = document.getElementById('offClose');
+  // ============================================
+  // MOBILE MENU
+  // ============================================
+  const mobileToggle = document.getElementById('mobileToggle');
+  const offcanvas = document.getElementById('offcanvasMenu');
+  const overlay = document.getElementById('overlay');
+  const offClose = document.getElementById('offClose');
 
-      function openMenu() {
-        offcanvas.classList.add('open');
-        overlay.classList.add('show');
-        document.body.classList.add('menu-open');
-        mobileToggle.setAttribute('aria-expanded', 'true');
-        offcanvas.setAttribute('aria-hidden', 'false');
-        overlay.setAttribute('aria-hidden', 'false');
-        offClose.focus();
-      }
+  function openMenu() {
+    offcanvas.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('menu-open');
+    mobileToggle.setAttribute('aria-expanded', 'true');
+    offcanvas.setAttribute('aria-hidden', 'false');
+    overlay.setAttribute('aria-hidden', 'false');
+    offClose.focus();
+  }
 
-      function closeMenu() {
-        offcanvas.classList.remove('open');
-        overlay.classList.remove('show');
-        document.body.classList.remove('menu-open');
-        mobileToggle.setAttribute('aria-expanded', 'false');
-        offcanvas.setAttribute('aria-hidden', 'true');
-        overlay.setAttribute('aria-hidden', 'true');
-        mobileToggle.focus();
-      }
+  function closeMenu() {
+    offcanvas.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('menu-open');
+    mobileToggle.setAttribute('aria-expanded', 'false');
+    offcanvas.setAttribute('aria-hidden', 'true');
+    overlay.setAttribute('aria-hidden', 'true');
+    mobileToggle.focus();
+  }
 
-      mobileToggle.addEventListener('click', function() {
-        const isOpen = offcanvas.classList.contains('open');
-        isOpen ? closeMenu() : openMenu();
-      });
+  if (mobileToggle) {
+    mobileToggle.addEventListener('click', function() {
+      const isOpen = offcanvas.classList.contains('open');
+      isOpen ? closeMenu() : openMenu();
+    });
+  }
 
-      offClose.addEventListener('click', closeMenu);
-      overlay.addEventListener('click', closeMenu);
+  if (offClose) offClose.addEventListener('click', closeMenu);
+  if (overlay) overlay.addEventListener('click', closeMenu);
 
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && offcanvas.classList.contains('open')) {
-          closeMenu();
-        }
-      });
-
-      // Smooth Scroll - tetap sama
-      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-        anchor.addEventListener('click', function(e) {
-          const href = this.getAttribute('href');
-          if (!href || href === '#') return;
-          
-          const target = document.querySelector(href);
-          if (target) {
-            e.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            
-            if (offcanvas.classList.contains('open')) {
-              closeMenu();
-            }
-          }
-        });
-      });
-
-      // Sticky CTA - tetap sama
-      (function() {
-        const stickyCTA = document.querySelector('.sticky-cta');
-        if (!stickyCTA) return;
-
-        let baseViewportHeight = window.innerHeight;
-
-        function isKeyboardOpen() {
-          return window.innerHeight < baseViewportHeight * 0.75;
-        }
-
-        function isNearBottom() {
-          return window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 160;
-        }
-
-        function shouldShow() {
-          if (isKeyboardOpen()) return false;
-          if (isNearBottom()) return false;
-          if (window.scrollY < window.innerHeight * 0.65) return false;
-          return true;
-        }
-
-        function updateCTA() {
-          stickyCTA.classList.toggle('show', shouldShow());
-        }
-
-        window.addEventListener('scroll', updateCTA, { passive: true });
-        window.addEventListener('resize', function() {
-          baseViewportHeight = Math.max(baseViewportHeight, window.innerHeight);
-          updateCTA();
-        });
-
-        updateCTA();
-      })();
-
-      // Scroll Reveal dengan IntersectionObserver
-      if ('IntersectionObserver' in window) {
-        const revealItems = document.querySelectorAll('[data-reveal]');
-        const observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-
-        revealItems.forEach(function(el) {
-          observer.observe(el);
-        });
-      }
-
-      // Lazy Load Images untuk portfolio
-      if ('IntersectionObserver' in window) {
-        const lazyImages = document.querySelectorAll('img[data-src]');
-        const imageObserver = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              const img = entry.target;
-              img.src = img.dataset.src;
-              img.removeAttribute('data-src');
-              imageObserver.unobserve(img);
-            }
-          });
-        }, { rootMargin: '200px 0px' });
-
-        lazyImages.forEach(function(img) {
-          imageObserver.observe(img);
-        });
-      }
-
-      // Legal Popup - tetap sama
-      (function() {
-        const popup = document.getElementById('legalPopup');
-        if (!popup) return;
-
-        const title = document.getElementById('legalTitle');
-        const content = document.getElementById('legalContent');
-        const closeBtn = popup.querySelector('.legal-close');
-
-        const popupData = {
-          privacy: {
-            title: 'Privacy Policy',
-            content: '<p>Kami menghormati privasi Anda. Informasi yang dikirimkan melalui website ini hanya digunakanuntuk keperluan komunikasi bisnis, konsultasi, dan penawaran layanan deartbox Packaging.</p><p>Kami tidak menjual, menyewakan, atau membagikan data pribadi Anda kepada pihak ketiga tanpa persetujuan, kecuali diwajibkan oleh hukum.</p>'
-          },
-          terms: {
-            title: 'Terms & Conditions',
-            content: '<p>Seluruh informasi yang ditampilkan di website ini bersifat informatif dan dapat berubah sewaktu-waktu tanpa pemberitahuan sebelumnya.</p><p>Spesifikasi, harga, dan lead time produksi akan dikonfirmasi secara tertulis sebelum proses produksi dimulai.</p>'
-          },
-          faq: {
-            title: 'Frequently Asked Questions',
-            content: '<ul><li><strong>Berapa MOQ hardbox?</strong> MOQ mulai dari 200 pcs.</li><li><strong>Berapa lama waktu produksi?</strong> Rata-rata 4–6 minggu tergantung spesifikasi.</li><li><strong>Apakah bisa fully custom?</strong> Ya, ukuran, material, dan finishing dapat disesuaikan.</li><li><strong>Apakah konsultasi berbayar?</strong> Tidak. Konsultasi awal gratis.</li></ul>'
-          }
-        };
-
-        document.querySelectorAll('[data-popup]').forEach(function(link) {
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const key = this.dataset.popup;
-            if (!popupData[key]) return;
-
-            title.textContent = popupData[key].title;
-            content.innerHTML = popupData[key].content;
-            popup.classList.add('show');
-            popup.setAttribute('aria-hidden', 'false');
-            
-            // Track legal page views
-            if (typeof gtag !== 'undefined') {
-              gtag('event', 'legal_view', {
-                event_category: 'Engagement',
-                event_label: key
-              });
-            }
-          });
-        });
-
-        function closePopup() {
-          popup.classList.remove('show');
-          popup.setAttribute('aria-hidden', 'true');
-        }
-
-        closeBtn.addEventListener('click', closePopup);
-        popup.addEventListener('click', function(e) {
-          if (e.target === popup) closePopup();
-        });
-        document.addEventListener('keydown', function(e) {
-          if (e.key === 'Escape' && popup.classList.contains('show')) {
-            closePopup();
-          }
-        });
-      })();
-
-      // Form Handler dengan analytics
-            window.handleRfq = function (e) {
-        e.preventDefault();
-
-        const form = e.target;
-        if (form.dataset.submitted) return;
-        form.dataset.submitted = 'true';
-
-        const data = new FormData(form);
-
-        const msg = `
-      Halo deartbox,
-      Saya ingin request quotation:
-
-      Nama: ${data.get('name')}
-      Email: ${data.get('email')}
-      Brand: ${data.get('brand')}
-      Industry: ${data.get('industry')}
-      Box: ${data.get('boxType')}
-      Qty: ${data.get('quantity')}
-      Brief: ${data.get('message')}
-        `;
-
-        const waUrl =
-          'https://wa.me/628195181427?text=' + encodeURIComponent(msg);
-
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'form_submit', {
-            event_category: 'Lead',
-            event_label: 'RFQ WhatsApp'
-          });
-        }
-
-        window.open(waUrl, '_blank');
-
-        setTimeout(() => {
-          form.reset();
-          delete form.dataset.submitted;
-        }, 3000);
-      };
-
-
-      // Track outbound link clicks
-      document.querySelectorAll('a[href^="http"]').forEach(function(link) {
-        if (link.hostname !== window.location.hostname) {
-          link.addEventListener('click', function() {
-            if (typeof gtag !== 'undefined') {
-              gtag('event', 'outbound_click', {
-                event_category: 'Outbound',
-                event_label: link.href
-              });
-            }
-          });
-        }
-      });
-
-      // Track CTA clicks
-      document.querySelectorAll('.cta, .btn-primary, .btn-primary2, .btn-ghost').forEach(function(button) {
-        button.addEventListener('click', function() {
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'cta_click', {
-              event_category: 'Engagement',
-              event_label: this.textContent.trim().substring(0, 50)
-            });
-          }
-        });
-      });
-
-      // Error tracking
-      window.addEventListener('error', function(e) {
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'error', {
-            event_category: 'JavaScript',
-            event_label: e.message,
-            non_interaction: true
-          });
-        }
-      });
-    })
-  ();
-  // Tambahkan validasi real-time
-document.querySelectorAll('input, textarea').forEach(el => {
-  el.addEventListener('blur', validateField);
-});    
-  </script>
-  <button id="backToTop" aria-label="Back to top">
-   <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M12 4l-7 7h4v9h6v-9h4z"/>
-  </svg>
-</button>
-<script>
-  const backToTop = document.getElementById('backToTop');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-      backToTop.classList.add('show');
-    } else {
-      backToTop.classList.remove('show');
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && offcanvas && offcanvas.classList.contains('open')) {
+      closeMenu();
     }
   });
 
-  backToTop.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+  // ============================================
+  // SMOOTH SCROLL
+  // ============================================
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href || href === '#') return;
+      
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        if (offcanvas && offcanvas.classList.contains('open')) {
+          closeMenu();
+        }
+      }
     });
   });
+
+  // ============================================
+  // STICKY CTA
+  // ============================================
+  (function() {
+    const stickyCTA = document.querySelector('.sticky-cta');
+    if (!stickyCTA) return;
+
+    let baseViewportHeight = window.innerHeight;
+
+    function isKeyboardOpen() {
+      return window.innerHeight < baseViewportHeight * 0.75;
+    }
+
+    function isNearBottom() {
+      return window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 160;
+    }
+
+    function shouldShow() {
+      if (isKeyboardOpen()) return false;
+      if (isNearBottom()) return false;
+      if (window.scrollY < window.innerHeight * 0.65) return false;
+      return true;
+    }
+
+    function updateCTA() {
+      stickyCTA.classList.toggle('show', shouldShow());
+    }
+
+    window.addEventListener('scroll', updateCTA, { passive: true });
+    window.addEventListener('resize', function() {
+      baseViewportHeight = Math.max(baseViewportHeight, window.innerHeight);
+      updateCTA();
+    });
+
+    updateCTA();
+  })();
+
+  // ============================================
+  // SCROLL REVEAL - INTERSECTION OBSERVER
+  // ============================================
+  if ('IntersectionObserver' in window) {
+    const revealItems = document.querySelectorAll('[data-reveal]');
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+    revealItems.forEach(function(el) {
+      observer.observe(el);
+    });
+  }
+
+  // ============================================
+  // LAZY LOAD IMAGES
+  // ============================================
+  if ('IntersectionObserver' in window) {
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.removeAttribute('data-src');
+          imageObserver.unobserve(img);
+        }
+      });
+    }, { rootMargin: '200px 0px' });
+
+    lazyImages.forEach(function(img) {
+      imageObserver.observe(img);
+    });
+  }
+
+  // ============================================
+  // LEGAL POPUP
+  // ============================================
+  (function() {
+    const popup = document.getElementById('legalPopup');
+    if (!popup) return;
+
+    const title = document.getElementById('legalTitle');
+    const content = document.getElementById('legalContent');
+    const closeBtn = popup.querySelector('.legal-close');
+
+    const popupData = {
+      privacy: {
+        title: 'Privacy Policy',
+        content: '<p>Kami menghormati privasi Anda. Informasi yang dikirimkan melalui website ini hanya digunakan untuk keperluan komunikasi bisnis, konsultasi, dan penawaran layanan deartbox Packaging.</p><p>Kami tidak menjual, menyewakan, atau membagikan data pribadi Anda kepada pihak ketiga tanpa persetujuan, kecuali diwajibkan oleh hukum.</p>'
+      },
+      terms: {
+        title: 'Terms & Conditions',
+        content: '<p>Seluruh informasi yang ditampilkan di website ini bersifat informatif dan dapat berubah sewaktu-waktu tanpa pemberitahuan sebelumnya.</p><p>Spesifikasi, harga, dan lead time produksi akan dikonfirmasi secara tertulis sebelum proses produksi dimulai.</p>'
+      },
+      faq: {
+        title: 'Frequently Asked Questions',
+        content: '<ul><li><strong>Berapa MOQ hardbox?</strong> MOQ mulai dari 200 pcs.</li><li><strong>Berapa lama waktu produksi?</strong> Rata-rata 4–6 minggu tergantung spesifikasi.</li><li><strong>Apakah bisa fully custom?</strong> Ya, ukuran, material, dan finishing dapat disesuaikan.</li><li><strong>Apakah konsultasi berbayar?</strong> Tidak. Konsultasi awal gratis.</li></ul>'
+      }
+    };
+
+    document.querySelectorAll('[data-popup]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const key = this.dataset.popup;
+        if (!popupData[key]) return;
+
+        title.textContent = popupData[key].title;
+        content.innerHTML = popupData[key].content;
+        popup.classList.add('show');
+        popup.setAttribute('aria-hidden', 'false');
+        
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'legal_view', {
+            event_category: 'Engagement',
+            event_label: key
+          });
+        }
+      });
+    });
+
+    function closePopup() {
+      popup.classList.remove('show');
+      popup.setAttribute('aria-hidden', 'true');
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closePopup);
+    
+    popup.addEventListener('click', function(e) {
+      if (e.target === popup) closePopup();
+    });
+    
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && popup.classList.contains('show')) {
+        closePopup();
+      }
+    });
+  })();
+
+  // ============================================
+  // FORM VALIDATION - NEW FUNCTION
+  // ============================================
+  function validateField(e) {
+    const field = e.target;
+    const value = field.value.trim();
+    
+    // Remove existing error
+    const existingError = field.parentElement.querySelector('.field-error');
+    if (existingError) existingError.remove();
+    field.classList.remove('field-invalid');
+
+    // Validate based on type
+    let isValid = true;
+    let errorMsg = '';
+
+    if (field.hasAttribute('required') && !value) {
+      isValid = false;
+      errorMsg = 'Field ini wajib diisi';
+    } else if (field.type === 'email' && value) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) {
+        isValid = false;
+        errorMsg = 'Format email tidak valid';
+      }
+    } else if (field.type === 'number' && value) {
+      const minValue = parseInt(field.getAttribute('min'));
+      if (minValue && parseInt(value) < minValue) {
+        isValid = false;
+        errorMsg = `Minimal ${minValue}`;
+      }
+    }
+
+    if (!isValid) {
+      field.classList.add('field-invalid');
+      const errorEl = document.createElement('span');
+      errorEl.className = 'field-error';
+      errorEl.textContent = errorMsg;
+      errorEl.style.cssText = 'display:block;font-size:12px;color:#e63946;margin-top:4px;';
+      field.parentElement.appendChild(errorEl);
+    }
+
+    return isValid;
+  }
+
+  // Add validation listeners
+  document.querySelectorAll('input, textarea, select').forEach(function(el) {
+    el.addEventListener('blur', validateField);
+  });
+
+  // ============================================
+  // FORM HANDLER WITH ANALYTICS
+  // ============================================
+  window.handleRfq = function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    
+    // Prevent double submission
+    if (form.dataset.submitted) return;
+
+    // Validate all fields
+    const fields = form.querySelectorAll('input, textarea, select');
+    let allValid = true;
+    
+    fields.forEach(function(field) {
+      const mockEvent = { target: field };
+      if (!validateField(mockEvent)) {
+        allValid = false;
+      }
+    });
+
+    if (!allValid) {
+      alert('Mohon lengkapi semua field yang wajib diisi dengan benar');
+      return;
+    }
+
+    form.dataset.submitted = 'true';
+
+    const data = new FormData(form);
+
+    const msg = `Halo deartbox,
+Saya ingin request quotation:
+
+Nama: ${data.get('name')}
+Email: ${data.get('email')}
+Brand: ${data.get('brand') || '-'}
+Industry: ${data.get('industry')}
+Box Type: ${data.get('boxType')}
+Quantity: ${data.get('quantity') || '-'}
+Brief: ${data.get('message')}`;
+
+    const waUrl = 'https://wa.me/628195181427?text=' + encodeURIComponent(msg);
+
+    // Analytics tracking
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'form_submit', {
+        event_category: 'Lead',
+        event_label: 'RFQ WhatsApp',
+        value: parseInt(data.get('quantity')) || 0
+      });
+    }
+
+    window.open(waUrl, '_blank');
+
+    // Reset form after delay
+    setTimeout(function() {
+      form.reset();
+      delete form.dataset.submitted;
+      // Remove all error messages
+      form.querySelectorAll('.field-error').forEach(function(el) {
+        el.remove();
+      });
+      form.querySelectorAll('.field-invalid').forEach(function(el) {
+        el.classList.remove('field-invalid');
+      });
+    }, 2000);
+  };
+
+  // ============================================
+  // BACK TO TOP BUTTON
+  // ============================================
+  const backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 500) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    }, { passive: true });
+
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  // ============================================
+  // ANALYTICS TRACKING
+  // ============================================
+  
+  // Track outbound links
+  document.querySelectorAll('a[href^="http"]').forEach(function(link) {
+    if (link.hostname !== window.location.hostname) {
+      link.addEventListener('click', function() {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'outbound_click', {
+            event_category: 'Outbound',
+            event_label: link.href
+          });
+        }
+      });
+    }
+  });
+
+  // Track CTA clicks
+  document.querySelectorAll('.cta-nav, .btn-hero-primary, .btn-cta-wa, .sticky-cta').forEach(function(button) {
+    button.addEventListener('click', function() {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'cta_click', {
+          event_category: 'Engagement',
+          event_label: this.textContent.trim().substring(0, 50)
+        });
+      }
+    });
+  });
+
+  // Error tracking
+  window.addEventListener('error', function(e) {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'js_error', {
+        event_category: 'Error',
+        event_label: e.message,
+        non_interaction: true
+      });
+    }
+  }, true);
+
+  // ============================================
+  // PERFORMANCE MONITORING
+  // ============================================
+  if ('PerformanceObserver' in window) {
+    try {
+      const perfObserver = new PerformanceObserver(function(list) {
+        for (const entry of list.getEntries()) {
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'web_vitals', {
+              event_category: 'Performance',
+              event_label: entry.name,
+              value: Math.round(entry.value),
+              non_interaction: true
+            });
+          }
+        }
+      });
+      
+      perfObserver.observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'] });
+    } catch (e) {
+      // PerformanceObserver not fully supported
+      console.log('Performance monitoring not available');
+    }
+  }
+
+})(); // ✅ FIXED - Proper IIFE closure
+
+// ============================================
+// CSS untuk form validation
+// ============================================
+const validationStyles = document.createElement('style');
+validationStyles.textContent = `
+  .field-invalid {
+    border-color: #e63946 !important;
+    background: rgba(230, 57, 70, 0.05) !important;
+  }
+  
+  .field-error {
+    display: block;
+    font-size: 12px;
+    color: #e63946;
+    margin-top: 4px;
+    animation: fadeIn 0.2s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+`;
+document.head.appendChild(validationStyles);
+
   
 </script>
 </body>
